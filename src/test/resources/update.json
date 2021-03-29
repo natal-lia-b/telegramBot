@@ -1,0 +1,37 @@
+{
+  "update_id": 693853793,
+  "message": {
+    "chatId": 0,
+    "superGroupMessage": false,
+    "command": true,
+    "channelMessage": false,
+    "groupMessage": false,
+    "reply": false,
+    "userMessage": true,
+    "message_id": 1,
+    "from": {
+      "bot": false,
+      "id": 0,
+      "first_name": "Natal-lia-B",
+      "is_bot": false
+    },
+    "date": 1617056634,
+    "chat": {
+      "groupChat": false,
+      "userChat": true,
+      "superGroupChat": false,
+      "channelChat": false,
+      "id": 0,
+      "type": "private",
+      "first_name": "Natal-lia-B"
+    },
+    "text": "/start",
+    "entities": [
+      {
+        "type": "bot_command",
+        "offset": 0,
+        "length": 6
+      }
+    ]
+  }
+}
