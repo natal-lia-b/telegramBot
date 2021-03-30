@@ -31,6 +31,12 @@ public class RequestDispatcher {
     MessageEventService messageEventService;
     @Autowired
     EventProcessor eventProcessor;
+    @Autowired
+    EventChangeProcessor dateChangeProcessor;
+    @Autowired
+    MessageEventService messageDateService;
+    @Autowired
+    EventProcessor dateProcessor;
 
     public User user = new User("minsk", "today", "film");
 
@@ -92,6 +98,18 @@ public class RequestDispatcher {
                 messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
                 user.setEvent("online");
                 break;
+            case TODAY:
+                messageService.sendMessage(update.getMessage(), dateChangeProcessor.run());
+                user.setDate("today");
+                break;
+            case TOMORROW:
+                messageService.sendMessage(update.getMessage(), dateChangeProcessor.run());
+                user.setDate("tomorrow");
+                break;
+            case WEEKEND:
+                messageService.sendMessage(update.getMessage(), dateChangeProcessor.run());
+                user.setDate("weekend");
+                break;
             case SETTING:
                 messageService.sendMessage(update.getMessage(), settingsProcessor.run());
                 break;
@@ -138,9 +156,15 @@ public class RequestDispatcher {
                     return BotCommand.PARTY;
                 } else if (msgText.startsWith(BotCommand.ONLINE.getCommand())) {
                     return BotCommand.ONLINE;
-                }
+                } else if (msgText.startsWith(BotCommand.TODAY.getCommand())) {
+                    return BotCommand.TODAY;
+                } else if (msgText.startsWith(BotCommand.TOMORROW.getCommand())) {
+                    return BotCommand.TOMORROW;
+                } else if (msgText.startsWith(BotCommand.WEEKEND.getCommand())) {
+                    return BotCommand.WEEKEND;
             }
         }
         return BotCommand.NONE;
     }
+}
 }
