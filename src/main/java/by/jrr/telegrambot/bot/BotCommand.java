@@ -13,16 +13,6 @@ public enum BotCommand {
         return command;
     }
 
-    @Override
-    public String toString() {
-        String result = "не знаю, что и сказать";
-
-        if (this.name().equals("CITY")) {
-            result = "Город";
-        }
-        return result;
-    }
-
     BotCommand(String command) {
         this.command = command;
     }
