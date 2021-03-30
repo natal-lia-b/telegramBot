@@ -1,21 +1,20 @@
 package by.jrr.telegrambot.service;
 
 import by.jrr.telegrambot.bot.BotCommand;
-import by.jrr.telegrambot.processor.CityProcessor;
-import by.jrr.telegrambot.processor.NoneProcessor;
-import by.jrr.telegrambot.processor.SettingsProcessor;
-import by.jrr.telegrambot.processor.StartProcessor;
+import by.jrr.telegrambot.processor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import static by.jrr.telegrambot.lists.City.CITY;
-
 @Service
 public class RequestDispatcher {
     @Autowired
     MessageService messageService;
+    @Autowired
+    CityChangeProcessor cityChangeProcessor;
+    @Autowired
+    MessageCityService messageCityService;
     @Autowired
     CityProcessor cityProcessor;
     @Autowired
@@ -28,10 +27,25 @@ public class RequestDispatcher {
     public void dispatch(Update update) {
         switch (getCommand(update)) {
             case CITY:
-                messageService.sendMessage(update.getMessage(), cityProcessor.run());
+                messageCityService.sendMessage(update.getMessage(), cityProcessor.run());
                 break;
-            case START:
-                messageService.sendMessage(update.getMessage(), startProcessor.run());
+            case MINSK:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case BREST:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case VITEBSK:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case GRODNO:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case MOGILEV:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case GOMEL:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
                 break;
             case SETTING:
                 messageService.sendMessage(update.getMessage(), settingsProcessor.run());
@@ -47,12 +61,24 @@ public class RequestDispatcher {
             Message message = update.getMessage();
             if (message != null && message.hasText()) {
                 String msgText = message.getText();
-                if (msgText.startsWith(CITY.getTitle())) {
+                if (msgText.startsWith(BotCommand.CITY.getCommand())) {
                     return BotCommand.CITY;
                 } else if (msgText.startsWith(BotCommand.START.getCommand())) {
                     return BotCommand.START;
                 } else if (msgText.startsWith(BotCommand.SETTING.getCommand())) {
                     return BotCommand.SETTING;
+                } else if (msgText.startsWith(BotCommand.MINSK.getCommand())) {
+                    return BotCommand.MINSK;
+                } else if (msgText.startsWith(BotCommand.BREST.getCommand())) {
+                    return BotCommand.BREST;
+                } else if (msgText.startsWith(BotCommand.VITEBSK.getCommand())) {
+                    return BotCommand.VITEBSK;
+                } else if (msgText.startsWith(BotCommand.GOMEL.getCommand())) {
+                    return BotCommand.GOMEL;
+                } else if (msgText.startsWith(BotCommand.GRODNO.getCommand())) {
+                    return BotCommand.GRODNO;
+                } else if (msgText.startsWith(BotCommand.MOGILEV.getCommand())) {
+                    return BotCommand.MOGILEV;
                 }
             }
         }

@@ -2,10 +2,15 @@ package by.jrr.telegrambot.bot;
 
 public enum BotCommand {
     START("/start"),
-    // команды 1го уровня
-    CITY("/city"),
     SETTING("/settings"),
-    NONE("/none");
+    NONE("/none"),
+    CITY ("Город"),
+    VITEBSK ("Витебск"),
+    BREST ("Брест"),
+    GOMEL ("Гомель"),
+    GRODNO ("Гродно"),
+    MINSK ("Минск"),
+    MOGILEV ("Могилев");
 
     String command;
 
@@ -16,5 +21,4 @@ public enum BotCommand {
     BotCommand(String command) {
         this.command = command;
     }
-
 }
