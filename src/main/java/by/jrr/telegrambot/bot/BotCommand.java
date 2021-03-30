@@ -4,6 +4,7 @@ public enum BotCommand {
     START("/start"),
     SETTING("/settings"),
     NONE("/none"),
+    FIND_EVENT ("Подобрать мероприятие"),
     CITY ("Город"),
     VITEBSK ("Витебск"),
     BREST ("Брест"),
