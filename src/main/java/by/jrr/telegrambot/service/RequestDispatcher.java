@@ -32,11 +32,11 @@ public class RequestDispatcher {
     @Autowired
     EventProcessor eventProcessor;
     @Autowired
-    EventChangeProcessor dateChangeProcessor;
+    DateChangeProcessor dateChangeProcessor;
     @Autowired
-    MessageEventService messageDateService;
+    MessageDateService messageDateService;
     @Autowired
-    EventProcessor dateProcessor;
+    DateProcessor dateProcessor;
 
     public User user = new User("minsk", "today", "film");
 
@@ -98,6 +98,9 @@ public class RequestDispatcher {
                 messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
                 user.setEvent("online");
                 break;
+            case DATE:
+                messageDateService.sendMessage(update.getMessage(), dateProcessor.run());
+                break;
             case TODAY:
                 messageService.sendMessage(update.getMessage(), dateChangeProcessor.run());
                 user.setDate("today");
@@ -156,15 +159,20 @@ public class RequestDispatcher {
                     return BotCommand.PARTY;
                 } else if (msgText.startsWith(BotCommand.ONLINE.getCommand())) {
                     return BotCommand.ONLINE;
+
+                } else if (msgText.startsWith(BotCommand.DATE.getCommand())) {
+                    return BotCommand.DATE;
+
                 } else if (msgText.startsWith(BotCommand.TODAY.getCommand())) {
                     return BotCommand.TODAY;
                 } else if (msgText.startsWith(BotCommand.TOMORROW.getCommand())) {
                     return BotCommand.TOMORROW;
                 } else if (msgText.startsWith(BotCommand.WEEKEND.getCommand())) {
                     return BotCommand.WEEKEND;
+                }
             }
+
         }
         return BotCommand.NONE;
     }
-}
 }

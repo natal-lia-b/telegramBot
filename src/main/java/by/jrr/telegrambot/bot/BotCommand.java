@@ -18,6 +18,7 @@ public enum BotCommand {
     CONCERT ("Концерты"),
     PARTY ("Вечеринки"),
     ONLINE ("Онлайн-мероприятия"),
+    DATE ("Дата"),
     TODAY ("Сегодня"),
     TOMORROW ("Завтра"),
     WEEKEND ("Ближайший уикенд");

@@ -49,7 +49,7 @@ public class MessageService {
 
         KeyboardRow keyboardSecondRow = new KeyboardRow();
         keyboardSecondRow.add(new KeyboardButton(BotCommand.CITY.getCommand()));
-        keyboardSecondRow.add(new KeyboardButton("Дата"));
+        keyboardSecondRow.add(new KeyboardButton(BotCommand.DATE.getCommand()));
         keyboardSecondRow.add(new KeyboardButton(BotCommand.EVENTS.getCommand()));
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
