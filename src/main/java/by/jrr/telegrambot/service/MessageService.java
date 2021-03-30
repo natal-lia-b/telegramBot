@@ -18,7 +18,6 @@ public class MessageService {
     @Autowired
     TelegramBot telegramBot;
 
-
     public void sendMessage(Message message, String text) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(message.getChatId().toString());
@@ -30,7 +29,6 @@ public class MessageService {
             e.printStackTrace();
         }
     }
-
     public void getMarkup(SendMessage sendMessage) {
         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
 

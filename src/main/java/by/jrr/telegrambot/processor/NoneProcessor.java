@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class NoneProcessor implements Processor{
     @Override
     public String run() {
-        return null;
+        return "no message";
     }
 }
