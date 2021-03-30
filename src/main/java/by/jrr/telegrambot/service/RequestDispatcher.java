@@ -29,6 +29,9 @@ public class RequestDispatcher {
             case CITY:
                 messageCityService.sendMessage(update.getMessage(), cityProcessor.run());
                 break;
+            case START:
+                messageService.sendMessage(update.getMessage(), startProcessor.run());
+                break;
             case MINSK:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
                 break;
