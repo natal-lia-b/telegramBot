@@ -1,5 +1,6 @@
 package by.jrr.telegrambot.service;
 
+import by.jrr.telegrambot.bot.BotCommand;
 import by.jrr.telegrambot.bot.TelegramBot;
 import by.jrr.telegrambot.lists.City;
 
@@ -47,9 +48,9 @@ public class MessageService {
 
 
         KeyboardRow keyboardSecondRow = new KeyboardRow();
-        keyboardSecondRow.add(new KeyboardButton(City.CITY.getTitle()));
+        keyboardSecondRow.add(new KeyboardButton(BotCommand.CITY.getCommand()));
         keyboardSecondRow.add(new KeyboardButton("Дата"));
-        keyboardSecondRow.add(new KeyboardButton("Тип мероприятия"));
+        keyboardSecondRow.add(new KeyboardButton(BotCommand.EVENTS.getCommand()));
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
 

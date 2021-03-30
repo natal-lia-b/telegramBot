@@ -11,6 +11,7 @@ public enum BotCommand {
     GRODNO ("Гродно"),
     MINSK ("Минск"),
     MOGILEV ("Могилев"),
+    EVENTS ("Мероприятия"),
     EXHIBITION ("Выставки"),
     FILM ("Кино"),
     THEATRE ("Театры"),
