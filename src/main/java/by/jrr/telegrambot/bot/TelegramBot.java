@@ -16,8 +16,6 @@ import java.io.File;
 @PropertySource("application.properties")
 public class TelegramBot extends TelegramLongPollingBot {
 
-     public User user = new User("MINSK", "TODAY", "FILM");
-
     @Value("${bot.username}")
     private String botUserName;
     @Value("${bot.token}")
