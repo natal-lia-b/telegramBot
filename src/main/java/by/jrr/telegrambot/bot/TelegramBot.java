@@ -1,5 +1,6 @@
-package by.jrr.telegrambot.service;
+package by.jrr.telegrambot.bot;
 
+import by.jrr.telegrambot.service.RequestDispatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,13 +21,18 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Autowired
     ObjectMapper objectMapper;
+    @Autowired
+    RequestDispatcher requestDispatcher;
 
     @Override
     public void onUpdateReceived(Update update) {
         try {
             objectMapper.writeValue(new File("src/test/resources/update.json"), update);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        requestDispatcher.dispatch(update);
     }
 
     @Override
