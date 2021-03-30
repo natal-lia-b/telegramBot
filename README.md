@@ -1,7 +1,7 @@
 # telegramBot
 а тут ссылочки на бот:
-Афиша бот: http://t.me/RPAs5_afisha_bot
-Unbot:     http://t.me/MyOPB_bot
+- Афиша бот: http://t.me/RPAs5_afisha_bot
+- Unbot:     http://t.me/MyOPB_bot
 
 ## мы профессионалы :)
 - работаем красиво - создаем ветки с названием типа имяПользователя_задача
