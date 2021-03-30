@@ -1,5 +1,6 @@
 package by.jrr.telegrambot.bot;
 
+import by.jrr.telegrambot.entity.User;
 import by.jrr.telegrambot.service.RequestDispatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.io.File;
 @Component
 @PropertySource("application.properties")
 public class TelegramBot extends TelegramLongPollingBot {
+
+     public User user = new User("MINSK", "TODAY", "FILM");
+
     @Value("${bot.username}")
     private String botUserName;
     @Value("${bot.token}")
