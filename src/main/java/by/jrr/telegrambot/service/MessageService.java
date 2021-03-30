@@ -1,6 +1,8 @@
 package by.jrr.telegrambot.service;
 
 import by.jrr.telegrambot.bot.TelegramBot;
+import by.jrr.telegrambot.lists.City;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -9,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +43,13 @@ public class MessageService {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         KeyboardRow keyboardFirstRow = new KeyboardRow();
-        keyboardFirstRow.add(new KeyboardButton("Chainge event"));
+        keyboardFirstRow.add(new KeyboardButton("Подобрать мероприятие"));
 
 
         KeyboardRow keyboardSecondRow = new KeyboardRow();
-        keyboardSecondRow.add( new KeyboardButton("City"));
-        keyboardSecondRow.add(new KeyboardButton("Day"));
-        keyboardSecondRow.add(new KeyboardButton("Type"));
+        keyboardSecondRow.add(new KeyboardButton(City.CITY.getTitle()));
+        keyboardSecondRow.add(new KeyboardButton("Дата"));
+        keyboardSecondRow.add(new KeyboardButton("Тип мероприятия"));
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
 

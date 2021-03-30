@@ -6,10 +6,21 @@ package by.jrr.telegrambot.lists;
  */
 
 public enum City {
-    VITEBSK,
-    BREST,
-    GOMEL,
-    GRODNO,
-    MINSK,
-    MOGILEV
+    CITY ("Город"),
+    VITEBSK ("Витебск"),
+    BREST ("Брест"),
+    GOMEL ("Гомель"),
+    GRODNO ("Гродно"),
+    MINSK ("Минск"),
+    MOGILEV ("Могилев");
+
+    String title;
+
+    City(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }
