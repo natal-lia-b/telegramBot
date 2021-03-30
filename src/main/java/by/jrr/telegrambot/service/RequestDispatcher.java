@@ -50,6 +50,24 @@ public class RequestDispatcher {
             case GOMEL:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
                 break;
+            case EXHIBITION:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case FILM:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case THEATRE:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case CONCERT:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case PARTY:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
+            case ONLINE:
+                messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                break;
             case SETTING:
                 messageService.sendMessage(update.getMessage(), settingsProcessor.run());
                 break;
