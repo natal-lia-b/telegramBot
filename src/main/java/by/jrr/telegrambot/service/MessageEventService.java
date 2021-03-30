@@ -2,8 +2,6 @@ package by.jrr.telegrambot.service;
 
 import by.jrr.telegrambot.bot.BotCommand;
 import by.jrr.telegrambot.bot.TelegramBot;
-import by.jrr.telegrambot.lists.City;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -13,17 +11,18 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MessageService {
+public class MessageEventService {
+
     @Autowired
     TelegramBot telegramBot;
 
     public void sendMessage(Message message, String text) {
         SendMessage sendMessage = new SendMessage();
+
         sendMessage.setChatId(message.getChatId().toString());
         sendMessage.setText(text);
         getMarkup(sendMessage);
@@ -44,13 +43,14 @@ public class MessageService {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         KeyboardRow keyboardFirstRow = new KeyboardRow();
-        keyboardFirstRow.add(new KeyboardButton("Подобрать мероприятие"));
-
+        keyboardFirstRow.add(new KeyboardButton(BotCommand.EXHIBITION.getCommand()));
+        keyboardFirstRow.add(new KeyboardButton(BotCommand.FILM.getCommand()));
+        keyboardFirstRow.add(new KeyboardButton(BotCommand.THEATRE.getCommand()));
 
         KeyboardRow keyboardSecondRow = new KeyboardRow();
-        keyboardSecondRow.add(new KeyboardButton(BotCommand.CITY.getCommand()));
-        keyboardSecondRow.add(new KeyboardButton("Дата"));
-        keyboardSecondRow.add(new KeyboardButton(BotCommand.EVENTS.getCommand()));
+        keyboardSecondRow.add(new KeyboardButton(BotCommand.CONCERT.getCommand()));
+        keyboardSecondRow.add(new KeyboardButton(BotCommand.PARTY.getCommand()));
+        keyboardSecondRow.add(new KeyboardButton(BotCommand.ONLINE.getCommand()));
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
 

@@ -10,7 +10,14 @@ public enum BotCommand {
     GOMEL ("Гомель"),
     GRODNO ("Гродно"),
     MINSK ("Минск"),
-    MOGILEV ("Могилев");
+    MOGILEV ("Могилев"),
+    EVENTS ("Мероприятия"),
+    EXHIBITION ("Выставки"),
+    FILM ("Кино"),
+    THEATRE ("Театры"),
+    CONCERT ("Концерты"),
+    PARTY ("Вечеринки"),
+    ONLINE ("Онлайн-мероприятия");
 
     String command;
 

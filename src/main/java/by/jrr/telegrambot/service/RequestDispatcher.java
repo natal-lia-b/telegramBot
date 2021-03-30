@@ -1,6 +1,8 @@
 package by.jrr.telegrambot.service;
 
 import by.jrr.telegrambot.bot.BotCommand;
+import by.jrr.telegrambot.bot.TelegramBot;
+import by.jrr.telegrambot.entity.User;
 import by.jrr.telegrambot.processor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,14 @@ public class RequestDispatcher {
     StartProcessor startProcessor;
     @Autowired
     NoneProcessor noneProcessor;
+    @Autowired
+    EventChangeProcessor eventChangeProcessor;
+    @Autowired
+    MessageEventService messageEventService;
+    @Autowired
+    EventProcessor eventProcessor;
+
+    public User user = new User("minsk", "today", "film");
 
     public void dispatch(Update update) {
         switch (getCommand(update)) {
@@ -37,18 +47,50 @@ public class RequestDispatcher {
                 break;
             case BREST:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                user.setCity("brest");
                 break;
             case VITEBSK:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                user.setCity("vitebsk");
                 break;
             case GRODNO:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                user.setCity("grodno");
                 break;
             case MOGILEV:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                user.setCity("mogilev");
                 break;
             case GOMEL:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                user.setCity("gomel");
+                break;
+            case EVENTS:
+                messageEventService.sendMessage(update.getMessage(), eventProcessor.run());
+                break;
+            case EXHIBITION:
+                messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
+                user.setEvent("exhibition");
+                break;
+            case FILM:
+                messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
+                user.setEvent("film");
+                break;
+            case THEATRE:
+                messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
+                user.setEvent("theatre");
+                break;
+            case CONCERT:
+                messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
+                user.setEvent("concert");
+                break;
+            case PARTY:
+                messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
+                user.setEvent("party");
+                break;
+            case ONLINE:
+                messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
+                user.setEvent("online");
                 break;
             case SETTING:
                 messageService.sendMessage(update.getMessage(), settingsProcessor.run());
@@ -82,6 +124,20 @@ public class RequestDispatcher {
                     return BotCommand.GRODNO;
                 } else if (msgText.startsWith(BotCommand.MOGILEV.getCommand())) {
                     return BotCommand.MOGILEV;
+                } else if (msgText.startsWith(BotCommand.EVENTS.getCommand())) {
+                    return BotCommand.EVENTS;
+                } else if (msgText.startsWith(BotCommand.EXHIBITION.getCommand())) {
+                    return BotCommand.EXHIBITION;
+                } else if (msgText.startsWith(BotCommand.FILM.getCommand())) {
+                    return BotCommand.FILM;
+                } else if (msgText.startsWith(BotCommand.THEATRE.getCommand())) {
+                    return BotCommand.THEATRE;
+                } else if (msgText.startsWith(BotCommand.CONCERT.getCommand())) {
+                    return BotCommand.CONCERT;
+                } else if (msgText.startsWith(BotCommand.PARTY.getCommand())) {
+                    return BotCommand.PARTY;
+                } else if (msgText.startsWith(BotCommand.ONLINE.getCommand())) {
+                    return BotCommand.ONLINE;
                 }
             }
         }
