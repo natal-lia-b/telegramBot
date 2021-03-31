@@ -18,9 +18,8 @@ public class FindEventProcessor implements Processor {
 
     private String generateLink() {
         StringBuilder link = new StringBuilder("https://afisha.tut.by/");
-        if (!user.getCity().equals("")) {
-            link.append(user.getDate() + user.getCity() + "/");
-        }
+
+        link.append(user.getDate() + user.getCity() + "/");
         if (!user.getEvent().equals("")) {
             link.append(user.getEvent() + "/");
         }
