@@ -18,7 +18,11 @@ public enum BotCommand {
     THEATRE ("Театры"),
     CONCERT ("Концерты"),
     PARTY ("Вечеринки"),
-    ONLINE ("Онлайн-мероприятия");
+    ONLINE ("Онлайн-мероприятия"),
+    DATE ("Дата"),
+    TODAY ("Сегодня"),
+    TOMORROW ("Завтра"),
+    WEEKEND ("Ближайший уикенд");
 
     String command;
 

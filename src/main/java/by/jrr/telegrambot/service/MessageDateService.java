@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MessageService {
+public class MessageDateService {
+
+
     @Autowired
     TelegramBot telegramBot;
 
     public void sendMessage(Message message, String text) {
         SendMessage sendMessage = new SendMessage();
+
         sendMessage.setChatId(message.getChatId().toString());
         sendMessage.setText(text);
         getMarkup(sendMessage);
@@ -41,15 +44,11 @@ public class MessageService {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         KeyboardRow keyboardFirstRow = new KeyboardRow();
-        keyboardFirstRow.add(new KeyboardButton(BotCommand.FIND_EVENT.getCommand()));
+        keyboardFirstRow.add(new KeyboardButton(BotCommand.TODAY.getCommand()));
+        keyboardFirstRow.add(new KeyboardButton(BotCommand.TOMORROW.getCommand()));
+        keyboardFirstRow.add(new KeyboardButton(BotCommand.WEEKEND.getCommand()));
 
-
-        KeyboardRow keyboardSecondRow = new KeyboardRow();
-        keyboardSecondRow.add(new KeyboardButton(BotCommand.CITY.getCommand()));
-        keyboardSecondRow.add(new KeyboardButton(BotCommand.DATE.getCommand()));
-        keyboardSecondRow.add(new KeyboardButton(BotCommand.EVENTS.getCommand()));
         keyboard.add(keyboardFirstRow);
-        keyboard.add(keyboardSecondRow);
 
         markup.setKeyboard(keyboard);
     }

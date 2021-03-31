@@ -32,6 +32,12 @@ public class RequestDispatcher {
     MessageEventService messageEventService;
     @Autowired
     EventProcessor eventProcessor;
+    @Autowired
+    DateChangeProcessor dateChangeProcessor;
+    @Autowired
+    MessageDateService messageDateService;
+    @Autowired
+    DateProcessor dateProcessor;
 
     public User user = new User("", "today", "");
 
@@ -99,6 +105,21 @@ public class RequestDispatcher {
                 user.setCity("");
                 user.setEvent("online-events");
                 break;
+            case DATE:
+                messageDateService.sendMessage(update.getMessage(), dateProcessor.run());
+                break;
+            case TODAY:
+                messageService.sendMessage(update.getMessage(), dateChangeProcessor.run());
+                user.setDate("today");
+                break;
+            case TOMORROW:
+                messageService.sendMessage(update.getMessage(), dateChangeProcessor.run());
+                user.setDate("tomorrow");
+                break;
+            case WEEKEND:
+                messageService.sendMessage(update.getMessage(), dateChangeProcessor.run());
+                user.setDate("weekend");
+                break;
             case SETTING:
                 messageService.sendMessage(update.getMessage(), settingsProcessor.run());
                 break;
@@ -147,8 +168,19 @@ public class RequestDispatcher {
                     return BotCommand.PARTY;
                 } else if (msgText.startsWith(BotCommand.ONLINE.getCommand())) {
                     return BotCommand.ONLINE;
+
+                } else if (msgText.startsWith(BotCommand.DATE.getCommand())) {
+                    return BotCommand.DATE;
+
+                } else if (msgText.startsWith(BotCommand.TODAY.getCommand())) {
+                    return BotCommand.TODAY;
+                } else if (msgText.startsWith(BotCommand.TOMORROW.getCommand())) {
+                    return BotCommand.TOMORROW;
+                } else if (msgText.startsWith(BotCommand.WEEKEND.getCommand())) {
+                    return BotCommand.WEEKEND;
                 }
             }
+
         }
         return BotCommand.NONE;
     }
