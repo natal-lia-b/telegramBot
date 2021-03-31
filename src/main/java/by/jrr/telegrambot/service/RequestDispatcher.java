@@ -1,7 +1,6 @@
 package by.jrr.telegrambot.service;
 
 import by.jrr.telegrambot.bot.BotCommand;
-import by.jrr.telegrambot.bot.TelegramBot;
 import by.jrr.telegrambot.entity.User;
 import by.jrr.telegrambot.processor.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class RequestDispatcher {
     @Autowired
     MessageService messageService;
+    @Autowired
+    FindEventProcessor findEventProcessor;
     @Autowired
     CityChangeProcessor cityChangeProcessor;
     @Autowired
@@ -38,10 +39,14 @@ public class RequestDispatcher {
     @Autowired
     DateProcessor dateProcessor;
 
-    public User user = new User("minsk", "today", "film");
+    public User user = new User("", "today", "");
 
     public void dispatch(Update update) {
         switch (getCommand(update)) {
+            case FIND_EVENT:
+                findEventProcessor.setUser(user);
+                messageService.sendMessage(update.getMessage(), findEventProcessor.run());
+                break;
             case CITY:
                 messageCityService.sendMessage(update.getMessage(), cityProcessor.run());
                 break;
@@ -50,26 +55,27 @@ public class RequestDispatcher {
                 break;
             case MINSK:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
+                user.setCity("");
                 break;
             case BREST:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
-                user.setCity("brest");
+                user.setCity("-brest");
                 break;
             case VITEBSK:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
-                user.setCity("vitebsk");
+                user.setCity("-vitebsk");
                 break;
             case GRODNO:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
-                user.setCity("grodno");
+                user.setCity("-grodno");
                 break;
             case MOGILEV:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
-                user.setCity("mogilev");
+                user.setCity("-mogilev");
                 break;
             case GOMEL:
                 messageService.sendMessage(update.getMessage(), cityChangeProcessor.run());
-                user.setCity("gomel");
+                user.setCity("-gomel");
                 break;
             case EVENTS:
                 messageEventService.sendMessage(update.getMessage(), eventProcessor.run());
@@ -96,7 +102,8 @@ public class RequestDispatcher {
                 break;
             case ONLINE:
                 messageService.sendMessage(update.getMessage(), eventChangeProcessor.run());
-                user.setEvent("online");
+                user.setCity("");
+                user.setEvent("online-events");
                 break;
             case DATE:
                 messageDateService.sendMessage(update.getMessage(), dateProcessor.run());
@@ -129,6 +136,8 @@ public class RequestDispatcher {
                 String msgText = message.getText();
                 if (msgText.startsWith(BotCommand.CITY.getCommand())) {
                     return BotCommand.CITY;
+                } else if (msgText.startsWith(BotCommand.FIND_EVENT.getCommand())) {
+                    return BotCommand.FIND_EVENT;
                 } else if (msgText.startsWith(BotCommand.START.getCommand())) {
                     return BotCommand.START;
                 } else if (msgText.startsWith(BotCommand.SETTING.getCommand())) {
